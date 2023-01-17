@@ -7,4 +7,4 @@ CREATE TABLE users(
 );
 
 INSERT INTO users (name,email) 
-VALUES ('johan', 'johan@gmail.com');
+VALUES ('sebastian', 'sebastian@gmail.com'); 
