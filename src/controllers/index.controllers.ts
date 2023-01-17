@@ -18,4 +18,20 @@ const getUsers = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
-export { initialApp, getUsers };
+const findUserById = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const id: number = parseInt(req.params.id);
+    const response: QueryResult = await pool.query(
+      `SELECT * FROM users WHERE id = $1`,
+      [id]
+    );
+    const { rows } = response;
+
+    return res.status(200).json(rows);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Internal server errror !" });
+  }
+};
+
+export { initialApp, getUsers, findUserById };
