@@ -34,4 +34,25 @@ const findUserById = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
-export { initialApp, getUsers, findUserById };
+const saveUser = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    type user = { name: string; email: string };
+    const { name, email }: user = req.body;
+    const consult: string = `INSERT INTO users(name,email) VALUES($1,$2)`;
+    const response: QueryResult = await pool.query(consult, [name, email]);
+    console.log(response);
+    return res.json({
+      save: "User save succesfully",
+      body: {
+        user: {
+          name,
+          email,
+        },
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "error save user !" });
+  }
+};
+export { initialApp, getUsers, findUserById, saveUser };
