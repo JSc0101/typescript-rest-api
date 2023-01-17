@@ -55,4 +55,15 @@ const saveUser = async (req: Request, res: Response): Promise<Response> => {
     return res.status(500).json({ error: "error save user !" });
   }
 };
-export { initialApp, getUsers, findUserById, saveUser };
+
+const deleteUser = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const id: number = parseInt(req.params.id);
+    const consult: string = `DELETE FROM users WHERE id = $1`;
+    await pool.query(consult, [id]);
+    return res.status(200).json({ delete: "users deleting" });
+  } catch (error) {
+    return res.status(500).json({ error: "error deleting user !" });
+  }
+};
+export { initialApp, getUsers, findUserById, saveUser, deleteUser };
