@@ -56,6 +56,19 @@ const saveUser = async (req: Request, res: Response): Promise<Response> => {
   }
 };
 
+const updateUser = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    type user = { name: string; email: string };
+    const id = parseInt(req.params.id);
+    const { name, email }: user = req.body;
+    const consult: string = `UPDATE users SET name = $1, email = $2 WHERE id = $3`;
+    await pool.query(consult, [name, email, id]);
+    return res.status(200).json({ user: "users update !" });
+  } catch (error) {
+    return res.status(500).json({ error: "error update user !" });
+  }
+};
+
 const deleteUser = async (req: Request, res: Response): Promise<Response> => {
   try {
     const id: number = parseInt(req.params.id);
@@ -66,4 +79,4 @@ const deleteUser = async (req: Request, res: Response): Promise<Response> => {
     return res.status(500).json({ error: "error deleting user !" });
   }
 };
-export { initialApp, getUsers, findUserById, saveUser, deleteUser };
+export { initialApp, getUsers, findUserById, saveUser, deleteUser, updateUser };
