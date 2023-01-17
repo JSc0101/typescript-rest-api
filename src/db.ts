@@ -5,6 +5,4 @@ const config = {
   password: "sebastian123",
   database: "typescript",
 };
-const pool = new Pool(config);
-
-export { pool };
+export const pool = new Pool(config);
