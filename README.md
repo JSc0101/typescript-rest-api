@@ -14,3 +14,11 @@
 ## aprendizaje
 
 - mi aprendizaje en el dia de hoy finazalizando este proyecto fue: entender mas los concepto de una rest api, manejar mucho mejor el tipado de typescript y ejecutar comando sql sin nignua dificultad
+
+
+## tecnologias usadas
+
+- Typescript
+- Node js
+- Express js
+- postgresql
